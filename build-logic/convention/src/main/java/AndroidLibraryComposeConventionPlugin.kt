@@ -1,5 +1,5 @@
 import com.android.build.gradle.LibraryExtension
-import com.kurly.preTask.convention.configureAndroidCompose
+import com.kurly.pretask.convention.configureAndroidCompose
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.getByType

@@ -1,4 +1,4 @@
-package com.kurly.preTask.ui.theme
+package com.kurly.pretask.designsystem.theme
 
 import android.app.Activity
 import android.os.Build

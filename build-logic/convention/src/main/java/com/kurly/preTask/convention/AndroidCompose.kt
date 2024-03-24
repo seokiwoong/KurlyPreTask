@@ -1,4 +1,4 @@
-package com.kurly.preTask.convention
+package com.kurly.pretask.convention
 
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project

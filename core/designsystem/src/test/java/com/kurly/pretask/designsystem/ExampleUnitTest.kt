@@ -1,4 +1,4 @@
-package com.kurly.pretask
+package com.kurly.pretask.designsystem
 
 import org.junit.Test
 

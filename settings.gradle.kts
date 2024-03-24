@@ -21,4 +21,8 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "KurlyPreTask"
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
+include(":core")
+include(":core:designsystem")
