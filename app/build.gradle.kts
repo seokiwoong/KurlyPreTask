@@ -5,10 +5,10 @@ plugins {
 }
 
 android {
-    namespace = "com.kurly.preTask"
+    namespace = "com.kurly.pretask"
 
     defaultConfig {
-        applicationId = "com.kurly.preTask"
+        applicationId = "com.kurly.pretask"
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -28,6 +28,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.designsystem)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

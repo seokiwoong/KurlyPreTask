@@ -1,4 +1,4 @@
-package com.kurly.preTask
+package com.kurly.pretask
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.kurly.preTask.ui.theme.KurlyPreTaskTheme
+import com.kurly.pretask.designsystem.theme.KurlyPreTaskTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
