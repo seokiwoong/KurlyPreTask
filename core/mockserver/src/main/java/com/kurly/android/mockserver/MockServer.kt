@@ -3,7 +3,7 @@ package com.kurly.android.mockserver
 import com.kurly.android.mockserver.core.FileProvider
 import okhttp3.Request
 
-internal class MockServer constructor(
+internal class MockServer (
     private val fileProvider: FileProvider
 ) {
 

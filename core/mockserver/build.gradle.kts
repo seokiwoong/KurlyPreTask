@@ -7,7 +7,7 @@ android {
     namespace = "com.kurly.pretask.core.mockserver"
 
     defaultConfig {
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.kurly.android.mockserver.CustomTestRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 }
