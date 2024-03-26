@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option java_package = "com.kurly.pretask.core.datastore";
+option java_multiple_files = true;
+
+message WishProductInfo {
+  int64 id = 1;
+}
+
+
+message UserWishProductPreferences {
+  repeated WishProductInfo wish_product_infos = 1;
+}

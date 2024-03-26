@@ -5,6 +5,9 @@ import coil.ImageLoader
 import coil.util.DebugLogger
 import com.kurly.android.mockserver.MockInterceptor
 import com.kurly.pretask.core.network.BuildConfig
+import com.kurly.pretask.network.KurlyNetworkDataSource
+import com.kurly.pretask.network.RetrofitKurly
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,70 +20,76 @@ import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Named
 import javax.inject.Singleton
 
+
 @Module
 @InstallIn(SingletonComponent::class)
-internal object NetworkModule {
+interface NetworkModule {
+    @Binds
+    fun bindsKurlyNetwork(
+        retrofitKurly: RetrofitKurly
+    ): KurlyNetworkDataSource
 
-    @Provides
-    @Singleton
-    fun httpLoggingInterceptor() =
-        HttpLoggingInterceptor()
-            .apply {
-                if (BuildConfig.DEBUG) {
-                    setLevel(HttpLoggingInterceptor.Level.BODY)
+
+    companion object {
+        @Provides
+        @Singleton
+        fun providesHttpLoggingInterceptor() =
+            HttpLoggingInterceptor()
+                .apply {
+                    if (BuildConfig.DEBUG) {
+                        setLevel(HttpLoggingInterceptor.Level.BODY)
+                    }
                 }
-            }
 
 
-    @Named("mock")
-    @Provides
-    @Singleton
-    fun okHttpCallFactoryForMock(
-        @ApplicationContext context: Context,
-        httpLoggingInterceptor: HttpLoggingInterceptor
-    ): Call.Factory =
-        OkHttpClient.Builder()
-            .addInterceptor(
-                MockInterceptor(context)
-            )
-            .addInterceptor(httpLoggingInterceptor)
-            .build()
+        @Named("mock")
+        @Provides
+        @Singleton
+        fun providesOkHttpCallFactoryForMock(
+            @ApplicationContext context: Context,
+            httpLoggingInterceptor: HttpLoggingInterceptor
+        ): Call.Factory =
+            OkHttpClient.Builder()
+                .addInterceptor(
+                    MockInterceptor(context)
+                )
+                .addInterceptor(httpLoggingInterceptor)
+                .build()
 
 
-    @Named("image")
-    @Provides
-    @Singleton
-    fun okHttpCallFactoryForImage(
-        @ApplicationContext context: Context,
-        httpLoggingInterceptor: HttpLoggingInterceptor
-    ): Call.Factory =
-        OkHttpClient.Builder()
-            .addInterceptor(
-                MockInterceptor(context)
-            )
-            .addInterceptor(httpLoggingInterceptor)
-            .build()
+        @Named("image")
+        @Provides
+        @Singleton
+        fun providesOkHttpCallFactoryForImage(
+            @ApplicationContext context: Context,
+            httpLoggingInterceptor: HttpLoggingInterceptor
+        ): Call.Factory =
+            OkHttpClient.Builder()
+                .addInterceptor(httpLoggingInterceptor)
+                .build()
 
 
-    @Provides
-    @Singleton
-    fun providesKotlinJson(): Json = Json {
-        ignoreUnknownKeys = true
+        @Provides
+        @Singleton
+        fun providesKotlinJson(): Json = Json {
+            ignoreUnknownKeys = true
+        }
+
+        @Provides
+        @Singleton
+        fun providesImageLoader(
+            @Named("image") okHttpCallFactory: dagger.Lazy<Call.Factory>,
+            @ApplicationContext application: Context,
+        ): ImageLoader =
+            ImageLoader.Builder(application)
+                .callFactory { okHttpCallFactory.get() }
+                .respectCacheHeaders(false)
+                .apply {
+                    if (BuildConfig.DEBUG) {
+                        logger(DebugLogger())
+                    }
+                }
+                .build()
+
     }
-
-    @Provides
-    @Singleton
-    fun imageLoader(
-        @Named("image") okHttpCallFactory: dagger.Lazy<Call.Factory>,
-        @ApplicationContext application: Context,
-    ): ImageLoader =
-        ImageLoader.Builder(application)
-            .callFactory { okHttpCallFactory.get() }
-            .respectCacheHeaders(false)
-            .apply {
-                if (BuildConfig.DEBUG) {
-                    logger(DebugLogger())
-                }
-            }
-            .build()
 }

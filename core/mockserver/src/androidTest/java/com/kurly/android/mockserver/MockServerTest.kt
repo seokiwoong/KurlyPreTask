@@ -23,7 +23,7 @@ internal class MockServerTest {
     }
 
     @Test
-    fun `리소스 파일 읽기 테스트`() {
+    fun `리소스_파일_읽기_테스트`() {
         println(fileProvider.getJsonFromAsset("file_read_test.json"))
     }
 }

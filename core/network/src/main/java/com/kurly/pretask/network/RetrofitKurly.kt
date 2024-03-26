@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 
 @Singleton
-internal class RetrofitKurly @Inject constructor(
+class RetrofitKurly @Inject constructor(
     json: Json,
     @Named("mock") okhttpCallFactory: dagger.Lazy<Call.Factory>,
 ) : KurlyNetworkDataSource {
