@@ -1,6 +1,7 @@
+import com.google.devtools.ksp.gradle.KspTaskMetadata
+
 plugins {
     alias(libs.plugins.kurly.android.library)
-    alias(libs.plugins.kurly.android.hilt)
     alias(libs.plugins.protobuf)
 }
 
@@ -44,9 +45,8 @@ androidComponents.beforeVariants {
 
 dependencies {
     api(libs.androidx.dataStore.core)
+
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.dataStore.preferences)
     implementation(libs.protobuf.kotlin.lite)
 

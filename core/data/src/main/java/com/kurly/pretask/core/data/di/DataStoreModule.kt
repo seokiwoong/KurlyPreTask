@@ -1,10 +1,10 @@
-package com.kurly.pretask.core.datastore.di
+package com.kurly.pretask.core.data.di
 
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
-import com.kurly.pretask.core.datastore.UserUserWishProductPreferenceSerializer
+import com.kurly.pretask.core.data.datastore.UserUserWishProductPreferenceSerializer
 import com.kurly.pretask.core.datastore.UserWishProductPreferences
 import dagger.Module
 import dagger.Provides

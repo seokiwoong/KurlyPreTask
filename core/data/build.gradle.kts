@@ -15,12 +15,11 @@ android {
 
 dependencies {
     api(projects.core.network)
-    implementation(projects.core.datastore)
+    api(projects.core.datastore)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.room.compiler)
-    implementation(libs.material)
+
     implementation(libs.protobuf.kotlin.lite)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

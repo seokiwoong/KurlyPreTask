@@ -1,8 +1,9 @@
-package com.kurly.pretask.core.datastore
+package com.kurly.pretask.core.data.datastore
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
-import androidx.datastore.preferences.protobuf.InvalidProtocolBufferException
+import com.google.protobuf.InvalidProtocolBufferException
+import com.kurly.pretask.core.datastore.UserWishProductPreferences
 import java.io.InputStream
 import java.io.OutputStream
 import javax.inject.Inject
