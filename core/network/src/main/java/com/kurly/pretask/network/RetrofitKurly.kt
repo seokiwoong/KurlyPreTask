@@ -31,7 +31,7 @@ class RetrofitKurly @Inject constructor(
     override suspend fun getSectionInfo(page: Int): NetworkSectionInfo =
         retrofitClient.sections(page)
 
-    override suspend fun getSectionProductInfo(sectionId: Int): NetworkProductInfo  =
+    override suspend fun getSectionProductInfo(sectionId: Long): NetworkProductInfo  =
         retrofitClient.sectionProducts(sectionId)
 
 }

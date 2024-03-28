@@ -20,6 +20,6 @@ interface RetrofitKurlyNetworkApi {
      */
     @GET("section/products")
     fun sectionProducts(
-        @Query("sectionId") sectionId: Int
+        @Query("sectionId") sectionId: Long
     ): NetworkProductInfo
 }
