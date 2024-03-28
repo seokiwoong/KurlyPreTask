@@ -13,12 +13,12 @@ class NetworkKurlyMainMainRepository @Inject constructor(
     private val kurlyNetworkDataSource: KurlyNetworkDataSource
 ) : KurlyMainRepository {
 
-    override suspend fun getSectionInfo(page: Int): Flow<SectionInfo> =
+    override fun getSectionInfo(page: Int): Flow<SectionInfo> =
         flow {
             emit(kurlyNetworkDataSource.getSectionInfo(page).toSectionInfo())
         }
 
-    override suspend fun getSectionProductInfo(sectionId: Int): Flow<ProductInfo> =
+    override fun getSectionProductInfo(sectionId: Long): Flow<ProductInfo> =
         flow {
             emit(kurlyNetworkDataSource.getSectionProductInfo(sectionId).toProductInfo())
         }
