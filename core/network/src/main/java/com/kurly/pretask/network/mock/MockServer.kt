@@ -1,6 +1,6 @@
-package com.kurly.android.mockserver
+package com.kurly.pretask.network.mock
 
-import com.kurly.android.mockserver.core.FileProvider
+import com.kurly.pretask.network.core.FileProvider
 import okhttp3.Request
 
 internal class MockServer (

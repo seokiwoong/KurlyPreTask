@@ -1,4 +1,4 @@
-package com.kurly.android.mockserver.core
+package com.kurly.pretask.network.core
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext

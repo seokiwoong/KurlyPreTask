@@ -1,6 +1,6 @@
-package com.kurly.android.mockserver
+package com.kurly.pretask.network
 
-import com.kurly.android.mockserver.core.FileProvider
+import com.kurly.pretask.network.core.FileProvider
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Before

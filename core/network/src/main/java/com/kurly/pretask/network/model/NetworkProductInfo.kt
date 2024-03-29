@@ -14,6 +14,6 @@ data class NetworkProduct(
     val name: String,
     val image: String,
     val originalPrice: Long,
-    val discountPrice: Long,
+    val discountPrice: Long? = null,
     val isSoldOut: Boolean
 )

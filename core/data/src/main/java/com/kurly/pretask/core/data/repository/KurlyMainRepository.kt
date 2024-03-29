@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface KurlyMainRepository {
     fun getSectionInfo(page: Int): Flow<SectionInfo>
 
-    fun getSectionProductInfo(sectionId: Long): Flow<ProductInfo>
+    fun getSectionProductInfo(sectionId: Int?): Flow<ProductInfo>
 }

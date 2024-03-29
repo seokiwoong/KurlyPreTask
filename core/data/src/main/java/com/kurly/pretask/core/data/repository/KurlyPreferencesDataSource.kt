@@ -3,7 +3,6 @@ package com.kurly.pretask.core.data.repository
 import android.util.Log
 import androidx.datastore.core.DataStore
 import com.kurly.pretask.core.data.datastore.UserWishProductData
-import com.kurly.pretask.core.data.model.Product
 import com.kurly.pretask.core.datastore.UserWishProductPreferences
 import com.kurly.pretask.core.datastore.WishProductInfo
 import com.kurly.pretask.core.datastore.copy
@@ -17,21 +16,21 @@ class KurlyPreferencesDataSource @Inject constructor(
     val userWishProductPreferenceData = userPreferences.data
         .map {
             UserWishProductData(
-                wishProductInfoList = it.wishProductInfosList
+                wishProductInfoList = it.wishProductInfosList.map { wish -> wish.id }
             )
         }
 
-    suspend fun setWishProduct(product: Product, wish: Boolean) {
+    suspend fun setWishProduct(productId: Long, wish: Boolean) {
         try {
             userPreferences.updateData { userWishProductPreferences ->
                 val index = userWishProductPreferences.wishProductInfosList
-                    .indexOfFirst { cachedData -> cachedData.id == product.id }
+                    .indexOfFirst { cachedData -> cachedData.id == productId }
                     .takeIf { it >= 0 }
                 if (wish && index == null) {
                     userWishProductPreferences.copy {
                         this.wishProductInfos.add(
                             WishProductInfo.getDefaultInstance().copy {
-                                id = product.id
+                                id = productId
                             }
                         )
                     }

@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class NetworkSectionInfo (
     val data : List<NetworkSection>,
-    val paging : NetworkPageInfo
+    val paging : NetworkPageInfo? = null
 )
 
 @Serializable
@@ -21,5 +21,5 @@ data class NetworkSection(
 @Serializable
 data class NetworkPageInfo(
     @SerialName("next_page")
-    val nextPage : String
+    val nextPage : Int
 )

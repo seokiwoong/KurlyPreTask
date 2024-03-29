@@ -1,7 +1,7 @@
-package com.kurly.android.mockserver.di
+package com.kurly.pretask.network
 
-import com.kurly.android.mockserver.core.FileProvider
-import com.kurly.android.mockserver.core.TestAssetFileProvider
+import com.kurly.pretask.network.core.FileProvider
+import com.kurly.pretask.network.core.TestAssetFileProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,6 +13,7 @@ import javax.inject.Singleton
 internal object MockServerModule {
     @Provides
     @Singleton
-    fun provideTestFileProvider(): FileProvider = TestAssetFileProvider()
+    fun provideTestFileProvider(): FileProvider =
+        TestAssetFileProvider()
 
 }

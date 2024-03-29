@@ -7,6 +7,7 @@ import javax.inject.Inject
 
 
 data class GetSectionInfoParams(
+    val size: Int = 5,
     val page: Int = 1
 )
 

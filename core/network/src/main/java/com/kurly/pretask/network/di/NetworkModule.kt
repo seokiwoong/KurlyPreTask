@@ -3,10 +3,10 @@ package com.kurly.pretask.network.di
 import android.content.Context
 import coil.ImageLoader
 import coil.util.DebugLogger
-import com.kurly.android.mockserver.MockInterceptor
 import com.kurly.pretask.core.network.BuildConfig
 import com.kurly.pretask.network.KurlyNetworkDataSource
 import com.kurly.pretask.network.RetrofitKurly
+import com.kurly.pretask.network.mock.MockInterceptor
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -50,10 +50,8 @@ interface NetworkModule {
             httpLoggingInterceptor: HttpLoggingInterceptor
         ): Call.Factory =
             OkHttpClient.Builder()
-                .addInterceptor(
-                    MockInterceptor(context)
-                )
                 .addInterceptor(httpLoggingInterceptor)
+                .addInterceptor(MockInterceptor(context))
                 .build()
 
 
@@ -61,7 +59,6 @@ interface NetworkModule {
         @Provides
         @Singleton
         fun providesOkHttpCallFactoryForImage(
-            @ApplicationContext context: Context,
             httpLoggingInterceptor: HttpLoggingInterceptor
         ): Call.Factory =
             OkHttpClient.Builder()

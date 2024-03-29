@@ -20,7 +20,6 @@ fun GridSectionItem(
     originalPrice: String,
     discountPrice: String?,
     discountRate: String?,
-    isSoldOut: Boolean,
     isWish: Boolean,
     onWishChange: (Boolean) -> Unit = {}
 ) {
@@ -31,7 +30,6 @@ fun GridSectionItem(
         originalPrice = originalPrice,
         discountPrice = discountPrice,
         discountRate = discountRate,
-        isSoldOut = isSoldOut,
         isWish = isWish,
         onWishChange = onWishChange
     )
@@ -50,7 +48,6 @@ private fun GridItemPreview() {
             originalPrice = "2000원",
             discountPrice = "1000원",
             discountRate = "50%",
-            isSoldOut = false,
             isWish = isWish,
             onWishChange = {
                 isWish = it
@@ -63,7 +60,6 @@ private fun GridItemPreview() {
             originalPrice = "2000원",
             discountPrice = null,
             discountRate = null,
-            isSoldOut = false,
             isWish = isWish,
             onWishChange = {
                 isWish = it

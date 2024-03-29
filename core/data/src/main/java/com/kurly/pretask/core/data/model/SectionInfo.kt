@@ -6,7 +6,7 @@ import com.kurly.pretask.network.model.NetworkSectionInfo
 
 data class SectionInfo(
     val data: List<Section>,
-    val paging: PageInfo
+    val paging: PageInfo?
 )
 
 data class Section(
@@ -17,7 +17,7 @@ data class Section(
 )
 
 data class PageInfo(
-    val nextPage: String
+    val nextPage: Int
 )
 
 fun NetworkPageInfo.toPageInfo() =
@@ -33,5 +33,5 @@ fun NetworkSection.toSection() = Section(
 
 fun NetworkSectionInfo.toSectionInfo() = SectionInfo(
     data = data.map { it.toSection() },
-    paging = paging.toPageInfo()
+    paging = paging?.toPageInfo()
 )

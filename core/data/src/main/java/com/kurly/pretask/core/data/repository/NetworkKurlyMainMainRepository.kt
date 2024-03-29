@@ -18,7 +18,7 @@ class NetworkKurlyMainMainRepository @Inject constructor(
             emit(kurlyNetworkDataSource.getSectionInfo(page).toSectionInfo())
         }
 
-    override fun getSectionProductInfo(sectionId: Long): Flow<ProductInfo> =
+    override fun getSectionProductInfo(sectionId: Int?): Flow<ProductInfo> =
         flow {
             emit(kurlyNetworkDataSource.getSectionProductInfo(sectionId).toProductInfo())
         }

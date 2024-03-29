@@ -10,7 +10,7 @@ interface RetrofitKurlyNetworkApi {
      * sections api
      */
     @GET("sections")
-    fun sections(
+    suspend fun sections(
         @Query("page") page: Int
     ): NetworkSectionInfo
 
@@ -19,7 +19,7 @@ interface RetrofitKurlyNetworkApi {
      * section products api
      */
     @GET("section/products")
-    fun sectionProducts(
-        @Query("sectionId") sectionId: Long
+    suspend fun sectionProducts(
+        @Query("sectionId") sectionId: Int?
     ): NetworkProductInfo
 }

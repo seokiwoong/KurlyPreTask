@@ -6,5 +6,5 @@ import com.kurly.pretask.network.model.NetworkSectionInfo
 interface KurlyNetworkDataSource {
     suspend fun getSectionInfo(page: Int): NetworkSectionInfo
 
-    suspend fun getSectionProductInfo(sectionId: Long): NetworkProductInfo
+    suspend fun getSectionProductInfo(sectionId: Int?): NetworkProductInfo
 }

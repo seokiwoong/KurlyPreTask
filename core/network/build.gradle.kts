@@ -23,8 +23,6 @@ android {
 }
 
 dependencies {
-    api(projects.core.mockserver)
-    testImplementation(projects.core.mockserver)
     api(libs.kotlinx.datetime)
 
     implementation(libs.coil.kt)
