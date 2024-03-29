@@ -3,11 +3,10 @@ package com.kurly.pretask.designsystem.component
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,7 +18,7 @@ import com.kurly.pretask.core.domain.data.UiProduct
 
 
 @Composable
-fun HorizontalSectionComponent(
+fun VerticalSectionComponent(
     uiData: UiData,
     onWishChange: (Boolean) -> Unit
 ) {
@@ -32,17 +31,14 @@ fun HorizontalSectionComponent(
                 .wrapContentHeight()
         ) {
             uiData.productList?.let { productList ->
-                LazyRow(
-                    modifier = Modifier,
-                    horizontalArrangement = Arrangement.spacedBy(5.dp),
-                    contentPadding = PaddingValues(
-                        horizontal = 8.dp,
-                        vertical = 8.dp
-                    )
+                Column(
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp,
+                            vertical = 8.dp),
+                    verticalArrangement = Arrangement.spacedBy(5.dp)
                 ) {
-                    items(items = productList,
-                        key = { it.id }) { product ->
-                        HorizontalSectionItem(
+                    productList.forEach {product ->
+                        VerticalSectionItem(
                             name = product.name,
                             originalPrice = product.originalPrice,
                             discountPrice = product.discountPrice,
@@ -60,26 +56,31 @@ fun HorizontalSectionComponent(
 
 @Preview
 @Composable
-fun HorizontalSectionComponentPreview() {
-    HorizontalSectionComponent(
-        uiData = UiData(
-            title = "title",
-            id = 0,
-            type = SectionType.horizontal,
-            1,
-            productList = (0..10).map {
-                UiProduct(
-                    id = it.toLong(),
-                    name = "name",
-                    image = "image",
-                    originalPrice = "3000원",
-                    discountPrice = null,
-                    percent = null,
-                    isWish = false
-                )
-            }.toList()
-        ),
-        onWishChange = {}
-    )
+fun VerticalSectionComponentPreview() {
+    LazyColumn {
+        items(100){
+            VerticalSectionComponent(
+                uiData = UiData(
+                    title = "title",
+                    id = 0,
+                    type = SectionType.horizontal,
+                    1,
+                    productList = (0..10).map {
+                        UiProduct(
+                            id = it.toLong(),
+                            name = "name",
+                            image = "image",
+                            originalPrice = "3000원",
+                            discountPrice = null,
+                            percent = null,
+                            isWish = false
+                        )
+                    }.toList()
+                ),
+                onWishChange = {}
+            )
+        }
+    }
+
 
 }

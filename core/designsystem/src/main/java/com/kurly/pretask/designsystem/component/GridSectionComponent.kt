@@ -2,9 +2,11 @@ package com.kurly.pretask.designsystem.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -23,34 +25,38 @@ fun GridSectionComponent(
     uiData: UiData,
     onWishChange: (Boolean) -> Unit
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-    ) {
-        uiData.productList?.let { productList ->
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(3),
-                contentPadding = PaddingValues(
-                    horizontal = 8.dp,
-                    vertical = 8.dp
-                ),
-                horizontalArrangement = Arrangement.spacedBy(5.dp),
-                verticalArrangement = Arrangement.spacedBy(5.dp)
-            ) {
-                items(items = productList,
-                    key = { it.id }) { product ->
-                    GridSectionItem(
-                        name = product.name,
-                        originalPrice = product.originalPrice,
-                        discountPrice = product.discountPrice,
-                        discountRate = product.discountPrice,
-                        isWish = product.isWish,
-                        onWishChange = onWishChange
-                    )
+    Column {
+        SectionTitle(title = uiData.title)
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+        ) {
+            uiData.productList?.let { productList ->
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(3),
+                    contentPadding = PaddingValues(
+                        horizontal = 8.dp,
+                        vertical = 8.dp
+                    ),
+                    horizontalArrangement = Arrangement.spacedBy(5.dp),
+                    verticalArrangement = Arrangement.spacedBy(5.dp)
+                ) {
+                    items(items = productList,
+                        key = { it.id }) { product ->
+                        GridSectionItem(
+                            name = product.name,
+                            originalPrice = product.originalPrice,
+                            discountPrice = product.discountPrice,
+                            discountRate = product.discountPrice,
+                            isWish = product.isWish,
+                            onWishChange = onWishChange
+                        )
+                    }
                 }
-            }
-        } ?: LoadingView(modifier = Modifier.align(Alignment.Center))
+            } ?: LoadingView(modifier = Modifier.align(Alignment.Center))
+        }
     }
 }
 

@@ -48,7 +48,6 @@ fun VerticalSectionItem(
     originalPrice: String,
     discountPrice: String?,
     discountRate: String?,
-    isSoldOut: Boolean,
     isWish: Boolean,
     onWishChange: (Boolean) -> Unit = {}
 ) {
@@ -170,7 +169,6 @@ private fun VerticalSectionItemPreview() {
             originalPrice = "2000원",
             discountPrice = "1000원",
             discountRate = "50%",
-            isSoldOut = false,
             isWish = isWish,
             onWishChange = {
                 isWish = it
@@ -183,7 +181,6 @@ private fun VerticalSectionItemPreview() {
             originalPrice = "2000원",
             discountPrice = null,
             discountRate = null,
-            isSoldOut = false,
             isWish = isWish,
             onWishChange = {
                 isWish = it

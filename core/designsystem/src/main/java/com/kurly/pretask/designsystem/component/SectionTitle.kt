@@ -18,8 +18,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SectionTitle(
     modifier: Modifier = Modifier,
-    title: String,
-    showDivider: Boolean = false
+    title: String
 ) {
 
     Column(
@@ -27,15 +26,6 @@ fun SectionTitle(
             .fillMaxWidth()
             .wrapContentHeight()
     ) {
-
-        if (showDivider) {
-            Spacer(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(1.dp)
-                    .background(color = Color.Gray)
-            )
-        }
         Text(
             modifier = Modifier.padding(8.dp),
             text = title
@@ -50,6 +40,5 @@ fun SectionTitle(
 fun SectionTitlePreview() {
     Column {
         SectionTitle(title = "Section Title")
-        SectionTitle(title = "Section Title", showDivider = true)
     }
 }

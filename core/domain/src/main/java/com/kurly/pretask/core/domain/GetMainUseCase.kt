@@ -43,12 +43,14 @@ class GetMainDataUseCase @Inject constructor(
                     getSectionInfoUseCase(params)
                         .filterIsInstance<Result.Success<SectionInfo>>()
                         .map {
-                            Pair(it.data.paging == null, it.data.data.map {
-                                it.toUiData(
-                                    it.type.toSectionType(),
-                                    it.url.substring(it.url.lastIndexOf("_") + 1).toInt()
-                                )
-                            })
+                            Pair(
+                                it.data.paging == null,
+                                it.data.data.map {
+                                    it.toUiData(
+                                        it.type.toSectionType(),
+                                        it.url.substring(it.url.lastIndexOf("_") + 1).toInt()
+                                    )
+                                })
                         }
                 }, parameters
             )
