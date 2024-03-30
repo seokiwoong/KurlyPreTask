@@ -13,7 +13,7 @@ data class Product(
     val name: String,
     val image: String,
     val originalPrice: Long,
-    val discountPrice: Long?,
+    val discountedPrice: Long?,
     val isSoldOut: Boolean
 )
 
@@ -24,14 +24,14 @@ fun NetworkProduct.toProduction() =
         name = name,
         image = image,
         originalPrice = originalPrice,
-        discountPrice = discountPrice,
+        discountedPrice = discountedPrice,
         isSoldOut = isSoldOut
     )
 
 
 fun NetworkProductInfo.toProductInfo() =
     ProductInfo(data =
-        data.map {
-            it.toProduction()
-        }
+    data.map {
+        it.toProduction()
+    }
     )

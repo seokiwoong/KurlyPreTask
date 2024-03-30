@@ -27,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -36,6 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.kurly.pretask.core.designsystem.R
 import com.kurly.pretask.designsystem.theme.DiscountTextColor
 
@@ -46,11 +48,14 @@ fun VerticalSectionItem(
     name: String,
     image: String? = null,
     originalPrice: String,
-    discountPrice: String?,
-    discountRate: String?,
+    discountPrice: String,
+    discountRate: String,
     isWish: Boolean,
     onWishChange: (Boolean) -> Unit = {}
 ) {
+    val isWishRemember by remember(isWish) {
+        mutableStateOf(isWish)
+    }
     Box(
         modifier = modifier
             .aspectRatio(6 / 4f)
@@ -60,7 +65,10 @@ fun VerticalSectionItem(
             modifier = Modifier
                 .fillMaxSize()
                 .background(color = Color.Gray),
-            model = image,
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(image)
+                .crossfade(true)
+                .build(),
             contentDescription = null,
             contentScale = ContentScale.Crop
         )
@@ -71,8 +79,8 @@ fun VerticalSectionItem(
                 .background(
                     brush = Brush.verticalGradient(
                         listOf(
-                            Color.Transparent,
-                            Color.Black.copy(alpha = 0.4f)
+                            Color.Black.copy(alpha = 0.2f),
+                            Color.Black.copy(alpha = 0.6f)
                         )
                     )
                 )
@@ -84,11 +92,12 @@ fun VerticalSectionItem(
                     .padding(horizontal = 8.dp),
                 text = name,
                 style = TextStyle(fontSize = 20.sp),
+                color = Color.White,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
 
-            if (discountRate != null && discountPrice != null) {
+            if (discountRate.isNotEmpty() && discountPrice.isNotEmpty()) {
                 FlowRow(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -100,7 +109,10 @@ fun VerticalSectionItem(
                             .padding(end = 4.dp),
                         text = discountRate,
                         color = DiscountTextColor,
-                        style = TextStyle(fontSize = 18.sp)
+                        style = TextStyle(
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold
+                        )
                     )
 
                     VerticalPriceText(
@@ -112,6 +124,7 @@ fun VerticalSectionItem(
                     Text(
                         modifier = Modifier.align(Alignment.Bottom),
                         text = originalPrice,
+                        color = Color.White,
                         style = TextStyle(
                             fontSize = 16.sp,
                             textDecoration = TextDecoration.LineThrough
@@ -130,11 +143,11 @@ fun VerticalSectionItem(
             modifier = Modifier.align(Alignment.TopEnd),
 
             onClick = {
-                onWishChange.invoke(!isWish)
+                onWishChange.invoke(!isWishRemember)
             }) {
             Image(
                 painter = painterResource(
-                    id = if (isWish) R.drawable.ic_btn_heart_on
+                    id = if (isWishRemember) R.drawable.ic_btn_heart_on
                     else R.drawable.ic_btn_heart_off
                 ),
                 contentDescription = "wish"
@@ -148,6 +161,7 @@ internal fun VerticalPriceText(modifier: Modifier = Modifier, price: String) {
     Text(
         modifier = modifier,
         text = price,
+        color = Color.White,
         style = TextStyle(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold
@@ -179,8 +193,8 @@ private fun VerticalSectionItemPreview() {
             name = "[샐러딩] 레디믹스 스탠다드 150g",
             image = "",
             originalPrice = "2000원",
-            discountPrice = null,
-            discountRate = null,
+            discountPrice = "",
+            discountRate = "",
             isWish = isWish,
             onWishChange = {
                 isWish = it

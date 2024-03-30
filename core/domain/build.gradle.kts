@@ -19,8 +19,6 @@ dependencies {
     api(projects.core.network)
 
     api(libs.kotlinx.serialization.json)
-    api(libs.retrofit.core)
-
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

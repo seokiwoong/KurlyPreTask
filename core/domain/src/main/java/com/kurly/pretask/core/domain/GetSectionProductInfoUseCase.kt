@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
-import java.text.NumberFormat
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 
@@ -21,22 +21,21 @@ class GetSectionProductInfoUseCase @Inject constructor(
     dataSource: KurlyPreferencesDataSource
 ) : FlowUseCase<GetSectionProductInfoParams, List<UiProduct>>() {
 
-    private val format = NumberFormat.getCurrencyInstance()
+    private val format = DecimalFormat("#,###원")
 
     private val wishProductIdListFlow: Flow<List<Long>> = dataSource.userWishProductPreferenceData
         .map { it.wishProductInfoList }
         .distinctUntilChanged()
 
 
-    override fun execute(parameters: GetSectionProductInfoParams): Flow<List<UiProduct>> {
-
-        return kurlyMainRepository.getSectionProductInfo(parameters.sectionId)
+    override fun execute(parameters: GetSectionProductInfoParams): Flow<List<UiProduct>> =
+        kurlyMainRepository.getSectionProductInfo(parameters.sectionId)
             .combine(wishProductIdListFlow) { productInfo, wishInfoList ->
                 productInfo.data.map { data ->
                     data.toUiProduct(
                         formatter = format,
-                        isWish = wishInfoList.any { id -> id == data.id })
+                        isWish = wishInfoList.any { id -> id == data.id }
+                    )
                 }
             }
-    }
 }

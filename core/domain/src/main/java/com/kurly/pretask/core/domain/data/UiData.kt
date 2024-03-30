@@ -1,31 +1,37 @@
 package com.kurly.pretask.core.domain.data
 
 import com.kurly.pretask.core.data.model.Section
+import java.util.UUID
 import javax.annotation.concurrent.Immutable
 
 
 sealed interface SectionType {
-    data object header : SectionType
+    @Immutable
     data object vertical : SectionType
-    data object  horizontal : SectionType
-    data object  grid : SectionType
-    data object  empty : SectionType
+
+    @Immutable
+    data object horizontal : SectionType
+
+    @Immutable
+    data object grid : SectionType
+
+    @Immutable
+    data object empty : SectionType
 }
 
 @Immutable
-data class UiData (
+data class UiData(
+    val uuid: String = UUID.randomUUID().toString(),
     val title: String,
     val id: Long,
     val type: SectionType,
-    val productId : Int?,
-    val productList : List<UiProduct>? = null
+    var productList: List<UiProduct>
 )
 
 
-fun Section.toUiData(type: SectionType, productId: Int?) = UiData(
+fun Section.toUiData(type: SectionType) = UiData(
     title = title,
     id = id,
     type = type,
-    productId = productId,
-    productList = null
+    productList = emptyList()
 )

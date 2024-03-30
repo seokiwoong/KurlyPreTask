@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -12,14 +13,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
+@Stable
 @Composable
 fun GridSectionItem(
     modifier: Modifier = Modifier,
     name: String,
-    image: String? = null,
+    image: String,
     originalPrice: String,
-    discountPrice: String?,
-    discountRate: String?,
+    discountPrice: String,
+    discountRate: String,
     isWish: Boolean,
     onWishChange: (Boolean) -> Unit = {}
 ) {
@@ -58,8 +60,8 @@ private fun GridItemPreview() {
             name = "[샐러딩] 레디믹스 스탠다드 150g",
             image = "",
             originalPrice = "2000원",
-            discountPrice = null,
-            discountRate = null,
+            discountPrice = "",
+            discountRate = "",
             isWish = isWish,
             onWishChange = {
                 isWish = it

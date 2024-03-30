@@ -13,7 +13,7 @@ data class Section(
     val title: String,
     val id: Long,
     val type: String,
-    val url: String
+    val productList: List<Product>? = null
 )
 
 data class PageInfo(
@@ -27,8 +27,7 @@ fun NetworkPageInfo.toPageInfo() =
 fun NetworkSection.toSection() = Section(
     title = title,
     id = id,
-    type = type,
-    url = url
+    type = type
 )
 
 fun NetworkSectionInfo.toSectionInfo() = SectionInfo(
