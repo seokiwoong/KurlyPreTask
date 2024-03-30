@@ -101,11 +101,11 @@ fun MainContent(
 
     Box(modifier = Modifier.pullRefresh(state)) {
         LazyColumn {
-            item { Spacer(modifier = Modifier.padding(8.dp)) }
+            item(contentType = "topSpace") { Spacer(modifier = Modifier.padding(8.dp)) }
             items(
                 pagingItems.itemCount,
                 key = pagingItems.itemKey { it.uuid },
-                contentType = pagingItems.itemContentType { item -> item.type }
+                contentType = pagingItems.itemContentType { item -> item.type.toString() }
             ) { index ->
                 val item = pagingItems[index] ?: return@items
                 ListItemByUiData(item, onEvent, drawDividerIndex(index))
@@ -116,7 +116,7 @@ fun MainContent(
                 appendLoading = appendLoading,
                 appendLoadingError = appendLoadingError
             )
-            item { Spacer(modifier = Modifier.padding(16.dp)) }
+            item(contentType = "bottomSpace") { Spacer(modifier = Modifier.padding(16.dp)) }
         }
 
 
@@ -132,7 +132,7 @@ fun MainContent(
 private fun ListItemByUiData(
     item: UiData,
     onEvent: (MainEvent) -> Unit,
-    drawDividerIndex : Boolean
+    drawDividerIndex: Boolean
 ) {
     when (item.type) {
         SectionType.Grid -> {
@@ -183,7 +183,7 @@ private fun LazyListScope.updateLoaderState(
 ) {
     if (errorState) {
         val error = pagingItems.loadState.refresh as LoadState.Error
-        item {
+        item(contentType = "error") {
             ErrorMessage(
                 modifier = Modifier.fillParentMaxSize(),
                 message = error.error.localizedMessage
@@ -191,10 +191,12 @@ private fun LazyListScope.updateLoaderState(
                 onClickRetry = { pagingItems.retry() })
         }
     } else if (appendLoading) {
-        item { LoadingNextPageItem(modifier = Modifier) }
+        item(contentType = "appendLoading"
+        ) { LoadingNextPageItem(modifier = Modifier) }
     } else if (appendLoadingError) {
         val error = pagingItems.loadState.append as LoadState.Error
-        item {
+        item(contentType = "appendLoadingError"
+        ) {
             ErrorMessage(
                 modifier = Modifier,
                 message = error.error.localizedMessage!!,
