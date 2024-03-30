@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
@@ -34,6 +35,7 @@ import com.kurly.pretask.designsystem.component.ErrorMessage
 import com.kurly.pretask.designsystem.component.GridSectionComponent
 import com.kurly.pretask.designsystem.component.HorizontalSectionComponent
 import com.kurly.pretask.designsystem.component.LoadingNextPageItem
+import com.kurly.pretask.designsystem.component.SectionTitle
 import com.kurly.pretask.designsystem.component.VerticalSectionComponent
 import com.kurly.pretask.designsystem.theme.KurlyPreTaskTheme
 import kotlinx.coroutines.launch
@@ -89,75 +91,31 @@ fun MainContent(
         }
     }
 
+    val drawDividerIndex: (Int) -> Boolean by remember {
+        derivedStateOf {
+            {
+                it != 0 && it != pagingItems.itemCount - 1
+            }
+        }
+    }
+
     Box(modifier = Modifier.pullRefresh(state)) {
         LazyColumn {
+            item { Spacer(modifier = Modifier.padding(8.dp)) }
             items(
                 pagingItems.itemCount,
                 key = pagingItems.itemKey { it.uuid },
-                contentType = pagingItems.itemContentType { item -> item.type.toString() }
+                contentType = pagingItems.itemContentType { item -> item.type }
             ) { index ->
                 val item = pagingItems[index] ?: return@items
-
-                when (item.type) {
-                    SectionType.grid -> {
-                        GridSectionComponent(
-                            uiData = item,
-                            onWishChange = {
-                                onEvent.invoke(MainEvent.UpdateWish(it))
-                            }
-                        )
-                    }
-
-                    SectionType.horizontal -> {
-                        HorizontalSectionComponent(
-                            uiData = item,
-                            onWishChange = {
-                                onEvent.invoke(MainEvent.UpdateWish(it))
-                            }
-                        )
-                    }
-
-                    SectionType.vertical -> {
-                        VerticalSectionComponent(
-                            uiData = item,
-                            onWishChange = {
-                                onEvent.invoke(MainEvent.UpdateWish(it))
-                            }
-                        )
-                    }
-
-                    SectionType.empty -> {
-                        Spacer(modifier = Modifier)
-                    }
-                }
-
-
-                if (index != pagingItems.itemCount - 1) {
-                    Divider(color = Color.Gray)
-                }
+                ListItemByUiData(item, onEvent, drawDividerIndex(index))
             }
-
-            if (errorState) {
-                val error = pagingItems.loadState.refresh as LoadState.Error
-                item {
-                    ErrorMessage(
-                        modifier = Modifier.fillParentMaxSize(),
-                        message = error.error.localizedMessage
-                            ?: stringResource(id = R.string.unknown_error),
-                        onClickRetry = { pagingItems.retry() })
-                }
-            } else if (appendLoading) {
-                item { LoadingNextPageItem(modifier = Modifier) }
-            } else if (appendLoadingError) {
-                val error = pagingItems.loadState.append as LoadState.Error
-                item {
-                    ErrorMessage(
-                        modifier = Modifier,
-                        message = error.error.localizedMessage!!,
-                        onClickRetry = { pagingItems.retry() })
-                }
-            }
-
+            updateLoaderState(
+                errorState = errorState,
+                pagingItems = pagingItems,
+                appendLoading = appendLoading,
+                appendLoadingError = appendLoadingError
+            )
             item { Spacer(modifier = Modifier.padding(16.dp)) }
         }
 
@@ -167,6 +125,81 @@ fun MainContent(
             state = state,
             modifier = Modifier.align(Alignment.TopCenter)
         )
+    }
+}
+
+@Composable
+private fun ListItemByUiData(
+    item: UiData,
+    onEvent: (MainEvent) -> Unit,
+    drawDividerIndex : Boolean
+) {
+    when (item.type) {
+        SectionType.Grid -> {
+            GridSectionComponent(
+                uiData = item,
+                onWishChange = {
+                    onEvent.invoke(MainEvent.UpdateWish(it))
+                }
+            )
+        }
+
+        SectionType.Horizontal -> {
+            HorizontalSectionComponent(
+                uiData = item,
+                onWishChange = {
+                    onEvent.invoke(MainEvent.UpdateWish(it))
+                }
+            )
+        }
+
+        SectionType.Vertical -> {
+            VerticalSectionComponent(
+                uiData = item,
+                onWishChange = {
+                    onEvent.invoke(MainEvent.UpdateWish(it))
+                }
+            )
+        }
+
+        SectionType.Empty -> {
+            Spacer(modifier = Modifier)
+        }
+
+        SectionType.Header -> {
+            if (drawDividerIndex) {
+                Divider(color = Color.Gray)
+            }
+            SectionTitle(title = item.title)
+        }
+    }
+}
+
+private fun LazyListScope.updateLoaderState(
+    errorState: Boolean,
+    pagingItems: LazyPagingItems<UiData>,
+    appendLoading: Boolean,
+    appendLoadingError: Boolean
+) {
+    if (errorState) {
+        val error = pagingItems.loadState.refresh as LoadState.Error
+        item {
+            ErrorMessage(
+                modifier = Modifier.fillParentMaxSize(),
+                message = error.error.localizedMessage
+                    ?: stringResource(id = R.string.unknown_error),
+                onClickRetry = { pagingItems.retry() })
+        }
+    } else if (appendLoading) {
+        item { LoadingNextPageItem(modifier = Modifier) }
+    } else if (appendLoadingError) {
+        val error = pagingItems.loadState.append as LoadState.Error
+        item {
+            ErrorMessage(
+                modifier = Modifier,
+                message = error.error.localizedMessage!!,
+                onClickRetry = { pagingItems.retry() })
+        }
     }
 }
 

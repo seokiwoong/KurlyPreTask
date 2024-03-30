@@ -36,11 +36,11 @@ class MainScreenViewModel @Inject constructor(
             .combine(wishProductIdListFlow) { pagingData: PagingData<UiData>,
                                               wishList: List<Long> ->
                 pagingData.map {
-                    it.copy(
-                        productList = it.productList.map {
-                            it.copy(isWish = wishList.any { id -> id == it.id })
-                        }
-                    )
+                    it.copy(productList = it.productList.map {
+                        it.copy(
+                            isWish = it.id in wishList
+                        )
+                    })
                 }
             }
 

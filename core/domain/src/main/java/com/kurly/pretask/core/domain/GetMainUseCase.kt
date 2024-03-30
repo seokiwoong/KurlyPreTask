@@ -16,10 +16,11 @@ import javax.inject.Inject
 
 private fun String.toSectionType(): SectionType =
     when (this) {
-        "grid" -> SectionType.grid
-        "vertical" -> SectionType.vertical
-        "horizontal" -> SectionType.horizontal
-        else -> SectionType.empty
+        "header" -> SectionType.Header
+        "grid" -> SectionType.Grid
+        "vertical" -> SectionType.Vertical
+        "horizontal" -> SectionType.Horizontal
+        else -> SectionType.Empty
     }
 
 class GetMainDataUseCase @Inject constructor(

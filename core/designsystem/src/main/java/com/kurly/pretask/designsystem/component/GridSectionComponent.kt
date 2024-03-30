@@ -2,7 +2,6 @@ package com.kurly.pretask.designsystem.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -12,6 +11,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,42 +26,43 @@ fun GridSectionComponent(
     uiData: UiData,
     onWishChange: (UiProduct) -> Unit
 ) {
-    Column {
-        SectionTitle(title = uiData.title)
 
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
+    val productList = remember(uiData.productList) {
+        uiData.productList
+    }
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+    ) {
+        LazyVerticalGrid(
+            modifier = Modifier.heightIn(max = 1500.dp),
+            columns = GridCells.Fixed(3),
+            contentPadding = PaddingValues(
+                horizontal = 8.dp,
+                vertical = 8.dp
+            ),
+            horizontalArrangement = Arrangement.spacedBy(5.dp),
+            verticalArrangement = Arrangement.spacedBy(5.dp)
         ) {
-            LazyVerticalGrid(
-                modifier = Modifier.heightIn(max = 1500.dp),
-                columns = GridCells.Fixed(3),
-                contentPadding = PaddingValues(
-                    horizontal = 8.dp,
-                    vertical = 8.dp
-                ),
-                horizontalArrangement = Arrangement.spacedBy(5.dp),
-                verticalArrangement = Arrangement.spacedBy(5.dp)
-            ) {
-                items(
-                    key = {
-                        it.uuid
-                    },
-                    items = uiData.productList
-                ) { product ->
-                    GridSectionItem(
-                        name = product.name,
-                        originalPrice = product.originalPrice,
-                        discountPrice = product.discountPrice,
-                        discountRate = product.percent,
-                        isWish = product.isWish,
-                        image = product.image,
-                        onWishChange = {
-                            onWishChange(product.copy(isWish = it))
-                        }
-                    )
-                }
+            items(
+                key = {
+                    it.uuid
+                },
+                items = productList
+            ) { product ->
+                GridSectionItem(
+                    name = product.name,
+                    originalPrice = product.originalPrice,
+                    discountPrice = product.discountPrice,
+                    discountRate = product.percent,
+                    isWish = product.isWish,
+                    image = product.image,
+                    onWishChange = {
+                        onWishChange(product.copy(isWish = it))
+                    }
+                )
             }
         }
     }
@@ -75,7 +76,7 @@ fun GridSectionComponentPreview() {
         uiData = UiData(
             title = "title",
             id = 0,
-            type = SectionType.grid,
+            type = SectionType.Grid,
             productList = (0..<6).map {
                 UiProduct(
                     id = it.toLong(),

@@ -6,17 +6,15 @@ import javax.annotation.concurrent.Immutable
 
 
 sealed interface SectionType {
-    @Immutable
-    data object vertical : SectionType
+    data object Header : SectionType
 
-    @Immutable
-    data object horizontal : SectionType
+    data object Vertical : SectionType
 
-    @Immutable
-    data object grid : SectionType
+    data object Horizontal : SectionType
 
-    @Immutable
-    data object empty : SectionType
+    data object Grid : SectionType
+
+    data object Empty : SectionType
 }
 
 @Immutable

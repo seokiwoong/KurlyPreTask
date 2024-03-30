@@ -7,6 +7,7 @@ import com.kurly.pretask.core.data.model.Section
 import com.kurly.pretask.core.data.model.toProduction
 import com.kurly.pretask.core.data.model.toSectionInfo
 import com.kurly.pretask.network.KurlyNetworkDataSource
+import com.kurly.pretask.network.model.NetworkProductInfo
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -36,11 +37,30 @@ class KurlySectionInfoPagingSource(
                         async(Dispatchers.IO) {
                             val product =
                                 kurlyNetworkDataSource.getSectionProductInfo(section.id.toInt())
-                            section.copy(productList = product.data.map { it.toProduction() })
+                            section.copy(
+                                productList =
+                                if (isOverflowGridItem(section, product)) {
+                                    product.data.subList(0, 5).map { it.toProduction() }
+                                } else {
+                                    product.data.map { it.toProduction() }
+                                }
+                            )
                         })
                 }
                 deferred.awaitAll()
             }
+
+            val dataResult = mutableListOf<Section>()
+            updatedSectionInfo.forEach { section ->
+                dataResult.add(section.copy(type = "header"))
+                if (section.type == "vertical") {
+                    section.productList?.map {
+                        dataResult.add(section.copy(productList = listOf(it)))
+                    }
+                }
+                dataResult.add(section)
+            }
+
             val nextKey = if (endOfPage) {
                 null
             } else {
@@ -52,7 +72,7 @@ class KurlySectionInfoPagingSource(
                 "endOfPage = $endOfPage"
             )
             LoadResult.Page(
-                data = updatedSectionInfo,
+                data = dataResult,
                 prevKey = if (requestPage == 1) null
                 else PageKeyData(requestPage - 1),
                 nextKey = nextKey?.let {
@@ -69,6 +89,11 @@ class KurlySectionInfoPagingSource(
             LoadResult.Error(e)
         }
     }
+
+    private fun isOverflowGridItem(
+        section: Section,
+        product: NetworkProductInfo
+    ) = section.type == "grid" && product.data.size > 6
 
     override fun getRefreshKey(state: PagingState<PageKeyData, Section>): PageKeyData? {
         return state.anchorPosition?.let { anchorPosition ->

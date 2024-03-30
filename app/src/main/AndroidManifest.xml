@@ -20,7 +20,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:configChanges="screenLayout|screenSize|fontScale|keyboard"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:theme="@style/Theme.KurlyPreTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
