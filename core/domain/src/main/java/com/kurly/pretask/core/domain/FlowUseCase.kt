@@ -1,11 +1,11 @@
-package com.kurly.pretask.core.domain
+package com.kt.naviagent.core.domain
 
-import com.kurly.pretask.core.domain.common.asResult
+import com.kt.naviagent.core.domain.common.asResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
-import com.kurly.pretask.core.domain.common.Result
+import com.kt.naviagent.core.domain.common.Result
 
 abstract class FlowUseCase<in P, R>(private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO) {
 

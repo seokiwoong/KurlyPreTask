@@ -19,27 +19,27 @@ dependencies {
 gradlePlugin {
     plugins {
         register("AndroidApplicationPlugin") {
-            id = "kurly.android.application"
+            id = "kt.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
         register("AndroidApplicationComposePlugin") {
-            id = "kurly.android.application.compose"
+            id = "kt.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
         }
         register("AndroidHiltPlugin") {
-            id = "kurly.android.hilt"
+            id = "kt.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"
         }
         register("AndroidLibraryPlugin") {
-            id = "kurly.android.library"
+            id = "kt.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
         register("AndroidLibraryComposePlugin") {
-            id = "kurly.android.library.compose"
+            id = "kt.android.library.compose"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
         register("AndroidFeature") {
-            id = "kurly.android.feature"
+            id = "kt.android.feature"
             implementationClass = "FeatureConventionPlugin"
         }
     }

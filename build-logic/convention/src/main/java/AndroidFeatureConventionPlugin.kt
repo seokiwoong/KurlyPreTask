@@ -1,4 +1,4 @@
-import com.kurly.pretask.convention.libs
+import com.kt.naviagent.convention.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
@@ -7,8 +7,8 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             pluginManager.apply {
-                apply("kurly.android.library")
-                apply("kurly.android.hilt")
+                apply("kt.android.library")
+                apply("kt.android.hilt")
             }
 
             dependencies {

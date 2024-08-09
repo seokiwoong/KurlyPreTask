@@ -1,9 +1,9 @@
-package com.kurly.pretask.core.domain
+package com.kt.naviagent.core.domain
 
-import com.kurly.pretask.core.data.repository.KurlyMainRepository
-import com.kurly.pretask.core.data.repository.KurlyPreferencesDataSource
-import com.kurly.pretask.core.domain.data.UiProduct
-import com.kurly.pretask.core.domain.data.toUiProduct
+import com.kt.naviagent.core.data.repository.KtMainRepository
+import com.kt.naviagent.core.data.repository.KtPreferencesDataSource
+import com.kt.naviagent.core.domain.data.UiProduct
+import com.kt.naviagent.core.domain.data.toUiProduct
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -17,8 +17,8 @@ data class GetSectionProductInfoParams(
 )
 
 class GetSectionProductInfoUseCase @Inject constructor(
-    private val kurlyMainRepository: KurlyMainRepository,
-    dataSource: KurlyPreferencesDataSource
+    private val ktMainRepository: KtMainRepository,
+    dataSource: KtPreferencesDataSource
 ) : FlowUseCase<GetSectionProductInfoParams, List<UiProduct>>() {
 
     private val format = DecimalFormat("#,###원")
@@ -29,7 +29,7 @@ class GetSectionProductInfoUseCase @Inject constructor(
 
 
     override fun execute(parameters: GetSectionProductInfoParams): Flow<List<UiProduct>> =
-        kurlyMainRepository.getSectionProductInfo(parameters.sectionId)
+        ktMainRepository.getSectionProductInfo(parameters.sectionId)
             .combine(wishProductIdListFlow) { productInfo, wishInfoList ->
                 productInfo.data.map { data ->
                     data.toUiProduct(

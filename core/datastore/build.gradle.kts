@@ -1,12 +1,10 @@
-import com.google.devtools.ksp.gradle.KspTaskMetadata
-
 plugins {
-    alias(libs.plugins.kurly.android.library)
+    alias(libs.plugins.kt.android.library)
     alias(libs.plugins.protobuf)
 }
 
 android {
-    namespace = "com.kurly.pretask.core.datastore"
+    namespace = "com.kt.naviagent.core.datastore"
 
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

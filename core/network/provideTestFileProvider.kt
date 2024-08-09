@@ -1,4 +1,4 @@
- @Provides
+    @Provides
     @Singleton
-    fun provideTestFileProvider(): com.kurly.pretask.network.core.FileProvider =
-        com.kurly.pretask.network.core.TestAssetFileProvider()
+    fun provideTestFileProvider(): com.kt.naviagent.network.core.FileProvider =
+        com.kt.naviagent.network.core.TestAssetFileProvider()

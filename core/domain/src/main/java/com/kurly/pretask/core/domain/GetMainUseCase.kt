@@ -1,13 +1,13 @@
-package com.kurly.pretask.core.domain
+package com.kt.naviagent.core.domain
 
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.kurly.pretask.core.data.model.Section
-import com.kurly.pretask.core.domain.common.Result
-import com.kurly.pretask.core.domain.data.SectionType
-import com.kurly.pretask.core.domain.data.UiData
-import com.kurly.pretask.core.domain.data.toUiData
-import com.kurly.pretask.core.domain.data.toUiProduct
+import com.kt.naviagent.core.data.model.Section
+import com.kt.naviagent.core.domain.common.Result
+import com.kt.naviagent.core.domain.data.SectionType
+import com.kt.naviagent.core.domain.data.UiData
+import com.kt.naviagent.core.domain.data.toUiData
+import com.kt.naviagent.core.domain.data.toUiProduct
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.map

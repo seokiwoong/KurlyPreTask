@@ -1,14 +1,14 @@
 plugins {
-    alias(libs.plugins.kurly.android.application)
-    alias(libs.plugins.kurly.android.application.compose)
-    alias(libs.plugins.kurly.android.hilt)
+    alias(libs.plugins.kt.android.application)
+    alias(libs.plugins.kt.android.application.compose)
+    alias(libs.plugins.kt.android.hilt)
 }
 
 android {
-    namespace = "com.kurly.pretask"
+    namespace = "com.kt.naviagent"
 
     defaultConfig {
-        applicationId = "com.kurly.pretask"
+        applicationId = "com.kt.naviagent"
         targetSdk = 34
         versionCode = 1
         versionName = "1.0.1"

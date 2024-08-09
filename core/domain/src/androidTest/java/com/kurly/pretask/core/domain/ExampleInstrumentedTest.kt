@@ -1,4 +1,4 @@
-package com.kurly.pretask.core.domain
+package com.kt.naviagent.core.domain
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.kurly.pretask.core.domain.test", appContext.packageName)
+        assertEquals("com.kt.naviagent.core.domain.test", appContext.packageName)
     }
 }

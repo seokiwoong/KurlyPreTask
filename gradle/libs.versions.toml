@@ -1,6 +1,6 @@
 [versions]
 activityCompose = "1.8.2"
-agp = "8.3.1"
+agp = "8.5.1"
 androidxComposeCompiler = "1.5.8"
 androidxDataStore = "1.0.0"
 appcompat = "1.6.1"
@@ -101,10 +101,10 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
 
 
-kurly-android-application = { id = "kurly.android.application", version = "unspecified" }
-kurly-android-application-compose = { id = "kurly.android.application.compose", version = "unspecified" }
-kurly-android-feature = { id = "kurly.android.feature", version = "unspecified" }
-kurly-android-hilt = { id = "kurly.android.hilt", version = "unspecified" }
-kurly-android-library = { id = "kurly.android.library", version = "unspecified" }
-kurly-android-library-compose = { id = "kurly.android.library.compose", version = "unspecified" }
-kurly-android-test = { id = "kurly.android.test", version = "unspecified" }
+kt-android-application = { id = "kt.android.application", version = "unspecified" }
+kt-android-application-compose = { id = "kt.android.application.compose", version = "unspecified" }
+kt-android-feature = { id = "kt.android.feature", version = "unspecified" }
+kt-android-hilt = { id = "kt.android.hilt", version = "unspecified" }
+kt-android-library = { id = "kt.android.library", version = "unspecified" }
+kt-android-library-compose = { id = "kt.android.library.compose", version = "unspecified" }
+kt-android-test = { id = "kt.android.test", version = "unspecified" }

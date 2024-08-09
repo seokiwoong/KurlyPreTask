@@ -1,6 +1,6 @@
-package com.kurly.pretask.core.domain.data
+package com.kt.naviagent.core.domain.data
 
-import com.kurly.pretask.core.data.model.Product
+import com.kt.naviagent.core.data.model.Product
 import java.text.NumberFormat
 import java.util.UUID
 import javax.annotation.concurrent.Immutable

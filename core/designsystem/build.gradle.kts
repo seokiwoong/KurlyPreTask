@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.kurly.android.library)
-    alias(libs.plugins.kurly.android.library.compose)
+    alias(libs.plugins.kt.android.library)
+    alias(libs.plugins.kt.android.library.compose)
 }
 
 android {
@@ -10,7 +10,7 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 
-    namespace = "com.kurly.pretask.core.designsystem"
+    namespace = "com.kt.naviagent.core.designsystem"
 
 }
 

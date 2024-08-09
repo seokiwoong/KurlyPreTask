@@ -1,4 +1,4 @@
-package com.kurly.pretask.core.data
+package com.kt.naviagent.core.data
 
 import org.junit.Test
 

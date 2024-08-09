@@ -1,4 +1,4 @@
-package com.kurly.pretask
+package com.kt.naviagent
 
 import org.junit.Test
 

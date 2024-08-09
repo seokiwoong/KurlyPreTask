@@ -1,11 +1,11 @@
 plugins {
-    alias(libs.plugins.kurly.android.library)
-    alias(libs.plugins.kurly.android.hilt)
+    alias(libs.plugins.kt.android.library)
+    alias(libs.plugins.kt.android.hilt)
     id("kotlinx-serialization")
 }
 
 android {
-    namespace = "com.kurly.pretask.core.domain"
+    namespace = "com.kt.naviagent.core.domain"
 
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

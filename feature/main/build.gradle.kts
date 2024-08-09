@@ -1,12 +1,12 @@
 plugins {
-    alias(libs.plugins.kurly.android.library)
-    alias(libs.plugins.kurly.android.library.compose)
-    alias(libs.plugins.kurly.android.hilt)
+    alias(libs.plugins.kt.android.library)
+    alias(libs.plugins.kt.android.library.compose)
+    alias(libs.plugins.kt.android.hilt)
 
 }
 
 android {
-    namespace = "com.kurly.feature.main"
+    namespace = "com.kt.naviagent.feature.main"
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
