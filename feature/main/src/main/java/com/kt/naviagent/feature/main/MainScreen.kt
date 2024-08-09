@@ -37,7 +37,7 @@ import com.kt.naviagent.designsystem.component.HorizontalSectionComponent
 import com.kt.naviagent.designsystem.component.LoadingNextPageItem
 import com.kt.naviagent.designsystem.component.SectionTitle
 import com.kt.naviagent.designsystem.component.VerticalSectionComponent
-import com.kt.naviagent.designsystem.theme.ktnaviagentTheme
+import com.kt.naviagent.designsystem.theme.KtNaviAgentTheme
 import kotlinx.coroutines.launch
 
 @Composable
@@ -208,7 +208,7 @@ private fun LazyListScope.updateLoaderState(
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    ktnaviagentTheme {
+    KtNaviAgentTheme {
         MainScreen()
     }
 }

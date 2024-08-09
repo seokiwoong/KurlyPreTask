@@ -11,7 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.kt.naviagent.feature.main.MainScreen
-import com.kt.naviagent.designsystem.theme.ktnaviagentTheme
+import com.kt.naviagent.designsystem.theme.KtNaviAgentTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ktnaviagentTheme {
+            KtNaviAgentTheme {
                 Scaffold(
                     modifier = Modifier
                         .fillMaxSize()
